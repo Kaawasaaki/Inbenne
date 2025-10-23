@@ -248,24 +248,6 @@ GET /health
 }
 ```
 
-## Caching Strategy
-
-### How It Works
-
-1. **Cache Check**: Every request first checks Redis
-2. **Cache Miss**: If not found, queries MongoDB and caches the result
-3. **Cache Hit**: Returns cached data immediately (5-10ms response)
-4. **TTL**: Cached data expires after 1 hour (configurable in code)
-5. **Invalidation**: DELETE operations remove from both cache and database
-
-### Performance Metrics
-
-| Metric | Without Cache | With Cache | Improvement |
-|--------|--------------|------------|-------------|
-| Response Time | 50-100ms | 5-10ms | 10x faster |
-| DB Queries | Every request | First request only | 90% reduction |
-| Concurrent Users | Limited by DB | 10x more | 10x scalability |
-
 ## Testing
 
 ### Test Redis Connection
